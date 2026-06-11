@@ -1,0 +1,92 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <% if (error) { %>
+    <div class="alert alert-error">
+      <span class="alert-icon">⚠️</span>
+      <div class="alert-content">
+        <p><strong>Error</strong> <%= error %></p>
+      </div>
+    </div>
+  <% } else if (artist) { %>
+    <section class="artist-hero">
+      <% if (artist.images && artist.images[0]) { %>
+        <div class="artist-hero-image">
+          <img src="<%= artist.images[0].url %>" alt="<%= artist.name %>">
+        </div>
+      <% } %>
+      
+      <div class="artist-hero-content">
+        <h1 class="artist-name"><%= artist.name %></h1>
+        
+        <% if (artist.genres && artist.genres.length > 0) { %>
+          <div class="artist-genres">
+            <% artist.genres.forEach(genre => { %>
+              <span class="genre-tag"><%= genre %></span>
+            <% }); %>
+          </div>
+        <% } %>
+        
+        <% if (artist.followers) { %>
+          <p class="artist-followers">
+            <strong><%= artist.followers.total.toLocaleString() %></strong> followers
+          </p>
+        <% } %>
+        
+        <% if (artist.external_urls && artist.external_urls.spotify) { %>
+          <a href="<%= artist.external_urls.spotify %>" target="_blank" class="btn btn-spotify" rel="noopener noreferrer">
+            Listen on Spotify
+          </a>
+        <% } %>
+      </div>
+    </section>
+
+    <% if (artist.popularity) { %>
+      <section class="artist-stats">
+        <div class="stat-card">
+          <span class="stat-icon">⭐</span>
+          <div class="stat-content">
+            <p class="stat-label">Popularity</p>
+            <p class="stat-value"><%= artist.popularity %>%</p>
+          </div>
+        </div>
+      </section>
+    <% } %>
+
+    <% if (topTracks && topTracks.length > 0) { %>
+      <section class="top-tracks-section">
+        <h2 class="section-title">Top Tracks</h2>
+        <div class="tracks-list">
+          <% topTracks.slice(0, 10).forEach((track, index) => { %>
+            <div class="track-item">
+              <span class="track-number"><%= index + 1 %></span>
+              
+              <div class="track-info">
+                <h3 class="track-name"><%= track.name %></h3>
+                <p class="track-meta">
+                  <% if (track.album && track.release_date) { %>
+                    <%= track.album.name %> • <%= new Date(track.release_date).getFullYear() %>
+                  <% } %>
+                </p>
+              </div>
+              
+              <% if (track.preview_url) { %>
+                <audio controls class="audio-player">
+                  <source src="<%= track.preview_url %>" type="audio/mpeg">
+                </audio>
+              <% } %>
+              
+              <a href="https://open.spotify.com/track/<%= track.id %>" target="_blank" class="btn btn-small btn-spotify" rel="noopener noreferrer">
+                Play
+              </a>
+            </div>
+          <% }); %>
+        </div>
+      </section>
+    <% } %>
+  <% } %>
+
+  <a href="/" class="btn btn-secondary">Back to Search</a>
+</main>
+
+<%- include('partials/footer') %>

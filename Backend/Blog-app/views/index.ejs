@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Magazine Blog - Share your stories with the world">
+        <title>Magazine - Home</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <h1>📝 MAGAZINE</h1>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="/" class="nav-link active">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                    <a href="/" class="nav-link">
+                        <span class="nav-icon">🔍</span>
+                        <span class="nav-text">Explore</span>
+                    </a>
+                    <a href="/" class="nav-link">
+                        <span class="nav-icon">🔔</span>
+                        <span class="nav-text">Notifications</span>
+                    </a>
+                    <a href="/create" class="nav-link">
+                        <span class="nav-icon">✉️</span>
+                        <span class="nav-text">Messages</span>
+                    </a>
+                </nav>
+
+                <a href="/create" class="btn-compose">
+                    ✍️ Create Post
+                </a>
+            </aside>
+
+            <!-- Main Feed -->
+            <main class="feed">
+                <!-- Feed Header -->
+                <div class="feed-header">
+                    <h2>Home</h2>
+                    <button class="btn-settings" aria-label="Settings">⚙️</button>
+                </div>
+
+                <!-- Posts Container -->
+                <section class="posts-container">
+                    <% posts.forEach(function(post){ %>
+                        <article class="post-card">
+                            <div class="post-header">
+                                <div class="post-author">
+                                    <div class="avatar">👤</div>
+                                    <div class="author-info">
+                                        <span class="author-name">Author</span>
+                                        <span class="post-time">Just now</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="post-content">
+                                <h3 class="post-title"><%= post.title %></h3>
+                                <p class="post-text"><%= post.content.substring(0, 180) %>...</p>
+                            </div>
+
+                            <div class="post-actions">
+                                <a href="/posts/<%= post.id %>" class="action-btn">
+                                    <span>👁️</span>
+                                    <span>View</span>
+                                </a>
+                                <a href="/posts/<%= post.id %>/edit" class="action-btn edit">
+                                    <span>✏️</span>
+                                    <span>Edit</span>
+                                </a>
+                                <form action="/delete/<%= post.id %>" method="POST" class="delete-form">
+                                    <button type="submit" class="action-btn delete" aria-label="Delete post">
+                                        <span>🗑️</span>
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </article>
+                    <% }); %>
+                </section>
+            </main>
+
+            <!-- Right Sidebar (empty for future features like trending) -->
+            <aside class="right-sidebar">
+                <div class="search-box">
+                    <input type="text" placeholder="Search Magazine..." aria-label="Search">
+                </div>
+                <div class="trending-section">
+                    <h3>Trending Now</h3>
+                    <p>Follow your favorite authors to see trending posts here</p>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 The MAGAZINE. All rights reserved.</p>
+        </footer>
+    </body>
+</html>

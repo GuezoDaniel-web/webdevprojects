@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Discover Your Music</h1>
+      <p class="hero-subtitle">Search for tracks, artists, and albums powered by Spotify</p>
+    </div>
+
+    <form id="search-form" method="POST" action="/search" class="search-form">
+      <div class="search-input-group">
+        <input 
+          type="text" 
+          name="query" 
+          placeholder="Search for a song, artist, or album..." 
+          class="search-input"
+          required
+          value="<%= searchQuery %>"
+        />
+        
+        <select name="type" class="search-type">
+          <option value="track">Tracks</option>
+          <option value="artist">Artists</option>
+          <option value="album">Albums</option>
+          <option value="all">All</option>
+        </select>
+        
+        <button type="submit" class="btn btn-primary">
+          <span class="search-icon">🔍</span> Search
+        </button>
+      </div>
+    </form>
+
+    <% if (error) { %>
+      <div class="alert alert-error">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-content">
+          <p><strong>Oops!</strong> <%= error %></p>
+        </div>
+      </div>
+    <% } %>
+  </section>
+
+  <section class="featured">
+    <h2>Getting Started</h2>
+    <div class="featured-grid">
+      <div class="featured-card">
+        <div class="featured-icon">🎵</div>
+        <h3>Search Tracks</h3>
+        <p>Find your favorite songs by name or artist</p>
+      </div>
+      <div class="featured-card">
+        <div class="featured-icon">🎤</div>
+        <h3>Discover Artists</h3>
+        <p>Explore artists and view their top tracks</p>
+      </div>
+      <div class="featured-card">
+        <div class="featured-icon">💿</div>
+        <h3>Explore Albums</h3>
+        <p>Browse and discover albums from your favorite artists</p>
+      </div>
+      <div class="featured-card">
+        <div class="featured-icon">🔥</div>
+        <h3>Real-Time Data</h3>
+        <p>Access live data directly from Spotify</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

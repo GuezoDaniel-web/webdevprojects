@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Create a New Blog Post - Magazine Blog">
+        <title>Create Post - Magazine</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <h1>📝 MAGAZINE</h1>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="/" class="nav-link">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                    <a href="/" class="nav-link">
+                        <span class="nav-icon">🔍</span>
+                        <span class="nav-text">Explore</span>
+                    </a>
+                    <a href="/" class="nav-link">
+                        <span class="nav-icon">🔔</span>
+                        <span class="nav-text">Notifications</span>
+                    </a>
+                    <a href="/create" class="nav-link active">
+                        <span class="nav-icon">✉️</span>
+                        <span class="nav-text">Messages</span>
+                    </a>
+                </nav>
+
+                <a href="/" class="btn-compose">
+                    ← Back to Home
+                </a>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="feed">
+                <!-- Page Header -->
+                <div class="feed-header">
+                    <h2>✍️ Create New Post</h2>
+                </div>
+
+                <!-- Create Post Form -->
+                <section class="create-post-container">
+                    <form action="/posts" method="POST" class="post-form">
+                        <div class="form-group">
+                            <label for="title" class="form-label">Post Title</label>
+                            <input 
+                                type="text" 
+                                id="title" 
+                                name="title" 
+                                class="form-input" 
+                                placeholder="What's your post about?" 
+                                required 
+                                maxlength="200"
+                            >
+                            <span class="char-count"><span id="title-count">0</span>/200</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content" class="form-label">Post Content</label>
+                            <textarea 
+                                id="content" 
+                                name="content" 
+                                class="form-textarea" 
+                                placeholder="Share your thoughts, stories, or ideas..." 
+                                required 
+                                maxlength="5000"
+                                rows="12"
+                            ></textarea>
+                            <span class="char-count"><span id="content-count">0</span>/5000</span>
+                        </div>
+
+                        <div class="form-actions">
+                            <a href="/" class="btn-cancel">Cancel</a>
+                            <button type="submit" class="btn-submit">Publish Post</button>
+                        </div>
+                    </form>
+                </section>
+            </main>
+
+            <!-- Right Sidebar -->
+            <aside class="right-sidebar">
+                <div class="info-box">
+                    <h3>💡 Tips for Great Posts</h3>
+                    <ul>
+                        <li>Keep your title clear and engaging</li>
+                        <li>Write at least 50 characters for content</li>
+                        <li>Use simple, clear language</li>
+                        <li>Proofread before publishing</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 The MAGAZINE. All rights reserved.</p>
+        </footer>
+
+        <script>
+            // Character counter for title
+            const titleInput = document.getElementById('title');
+            const titleCount = document.getElementById('title-count');
+            titleInput.addEventListener('input', (e) => {
+                titleCount.textContent = e.target.value.length;
+            });
+
+            // Character counter for content
+            const contentInput = document.getElementById('content');
+            const contentCount = document.getElementById('content-count');
+            contentInput.addEventListener('input', (e) => {
+                contentCount.textContent = e.target.value.length;
+            });
+
+            // Form validation
+            document.querySelector('.post-form').addEventListener('submit', (e) => {
+                const title = titleInput.value.trim();
+                const content = contentInput.value.trim();
+
+                if (title.length < 3) {
+                    e.preventDefault();
+                    alert('Title must be at least 3 characters long');
+                    return;
+                }
+
+                if (content.length < 10) {
+                    e.preventDefault();
+                    alert('Content must be at least 10 characters long');
+                    return;
+                }
+            });
+        </script>
+    </body>
+</html>
